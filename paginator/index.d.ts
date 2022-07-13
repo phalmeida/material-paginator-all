@@ -23,7 +23,6 @@ import { ThemePalette } from '@angular/material/core';
 declare namespace i1 {
     export {
         PageEvent,
-        PageSizeOptions,
         MatPaginatorDefaultOptions,
         MAT_PAGINATOR_DEFAULT_OPTIONS,
         MatPaginatorSelectConfig,
@@ -64,10 +63,7 @@ export declare class MatPaginator extends _MatPaginatorBase<MatPaginatorDefaultO
  */
 export declare abstract class _MatPaginatorBase<O extends {
     pageSize?: number;
-    pageSizeOptions?: (number | {
-        value: number;
-        label: string;
-    })[];
+    pageSizeOptions?: number[];
     hidePageSize?: boolean;
     showFirstLastButtons?: boolean;
 }> extends _MatPaginatorMixinBase implements OnInit, OnDestroy, CanDisable, HasInitialized {
@@ -90,11 +86,8 @@ export declare abstract class _MatPaginatorBase<O extends {
     set pageSize(value: NumberInput);
     private _pageSize;
     /** The set of provided page size options to display to the user. */
-    get pageSizeOptions(): (number | {
-        value: number;
-        label: string;
-    })[];
-    set pageSizeOptions(value: PageSizeOptions);
+    get pageSizeOptions(): number[];
+    set pageSizeOptions(value: number[] | readonly number[]);
     private _pageSizeOptions;
     /** Whether to hide the page size selection UI from the user. */
     get hidePageSize(): boolean;
@@ -109,10 +102,7 @@ export declare abstract class _MatPaginatorBase<O extends {
     /** Event emitted when the paginator changes the page size or page index. */
     readonly page: EventEmitter<PageEvent>;
     /** Displayed set of page size options. Will be sorted and include current page size. */
-    _displayedPageSizeOptions: {
-        value: number;
-        label: string;
-    }[];
+    _displayedPageSizeOptions: number[];
     constructor(_intl: MatPaginatorIntl, _changeDetectorRef: ChangeDetectorRef, defaults?: O);
     ngOnInit(): void;
     ngOnDestroy(): void;
@@ -159,10 +149,7 @@ export declare interface MatPaginatorDefaultOptions {
     /** Number of items to display on a page. By default set to 50. */
     pageSize?: number;
     /** The set of provided page size options to display to the user. */
-    pageSizeOptions?: (number | {
-        value: number;
-        label: string;
-    })[];
+    pageSizeOptions?: number[];
     /** Whether to hide the page size selection UI from the user. */
     hidePageSize?: boolean;
     /** Whether to show the first/last buttons UI to the user. */
@@ -235,14 +222,5 @@ export declare class PageEvent {
     /** The current total number of items being paged */
     length: number;
 }
-
-/** The set of provided page size options to display to the user. */
-export declare type PageSizeOptions = readonly (number | {
-    value: number;
-    label: string;
-})[] | (number | {
-    value: number;
-    label: string;
-})[];
 
 export { }
